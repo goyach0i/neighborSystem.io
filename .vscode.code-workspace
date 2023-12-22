@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": ".vscode"
+		},
+		{
+			"path": "css"
+		},
+		{
+			"path": "html"
+		},
+		{
+			"path": "images"
+		},
+		{
+			"path": "js"
+		},
+		{
+			"path": "lib"
+		}
+	]
+}

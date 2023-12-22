@@ -1,0 +1,68 @@
+#wrap {
+  width: 100vw;
+  height: 100vh;
+  background: url(../images/error/404bg.png);
+}
+.error {
+  width: 617px;
+  height: 607px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: url(../images/error/404_bg_img.png);
+}
+/* 에러 */
+.message {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+.message .error-box {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  font-weight: bold;
+  color: #fff;
+}
+.message .explanation {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+}
+.message .explanation p {
+  padding: 10px 0;
+  font-size: 22px;
+  color: #fff;
+  font-weight: none;
+}
+/* 홈버튼 */
+.home {
+  width: 100%;
+  height: 35%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home button {
+  width: 400px;
+  height: 40px;
+  background-color: #1e76e0;
+  border: 0;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 20px;
+}
+.home .copyright {
+  margin: 0 auto;
+  padding: 20px 0;
+  font-size: 13px;
+}
+.font-title{
+font-size: 280px;
+}
+.font-title-sub{
+font-size: 110px;
+}

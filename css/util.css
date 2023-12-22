@@ -1,0 +1,11 @@
+/* 활성화 */
+.active {
+  display: block !important;
+}
+
+/*  */
+.on {
+	
+}
+/* 가로, 세로, 마진, 패딩 값 변수 */
+mr5 { maring-left: 5px}

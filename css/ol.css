@@ -1,0 +1,130 @@
+.ol-box{box-sizing:border-box;border-radius:2px;border:2px solid #00f}
+.ol-mouse-position{top:8px;right:8px;position:absolute}
+.ol-scale-line{display:none;} /* byjang */
+.ol-scale-line{background:rgba(0,60,136,.3);border-radius:4px;bottom:8px;left:8px;padding:2px;position:absolute}
+.ol-scale-line-inner{border:1px solid #eee;border-top:none;color:#eee;font-size:10px;text-align:center;margin:1px;will-change:contents,width}
+.ol-overlay-container{will-change:left,right,top,bottom}
+.ol-unsupported{display:none}
+.ol-unselectable,.ol-viewport{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+---.ol-selectable{-webkit-touch-callout:default;-webkit-user-select:auto;-moz-user-select:auto;-ms-user-select:auto;user-select:auto}
+.ol-grabbing{cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}
+.ol-grab{cursor:move;cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}
+---.ol-control{position:absolute;background-color:rgba(255,255,255,.4);border-radius:4px;padding:2px}
+.ol-control{position:absolute;border-radius:4px;padding:2px}
+---.ol-control:hover{background-color:rgba(255,255,255,.6)}
+.ol-zoom{opacity: 0;top:.5em;left:.5em}
+.ol-rotate{top:.5em;right:.5em;transition:opacity .25s linear,visibility 0s linear}
+.ol-rotate.ol-hidden{opacity:0;visibility:hidden;transition:opacity .25s linear,visibility 0s linear .25s}
+.ol-zoom-extent{top:4.643em;left:.5em}
+.ol-full-screen{right:.5em;top:.5em}@media print{.ol-control{display:none}}
+.ol-control button{display:block;margin:1px;padding:0;color:#fff;font-size:1.14em;font-weight:700;text-decoration:none;text-align:center;height:1.375em;width:1.375em;line-height:.4em;background-color:rgba(0,60,136,.5);border:none;border-radius:2px}
+.ol-control button::-moz-focus-inner{border:none;padding:0}
+.ol-zoom-extent button{line-height:1.4em}
+.ol-compass{display:block;font-weight:400;font-size:1.2em;will-change:transform}
+.ol-touch .ol-control button{font-size:1.5em}
+.ol-touch .ol-zoom-extent{top:5.5em}
+.ol-control button:focus,.ol-control button:hover{text-decoration:none;background-color:rgba(0,60,136,.7)}
+.ol-zoom .ol-zoom-in{border-radius:2px 2px 0 0}
+.ol-zoom .ol-zoom-out{border-radius:0 0 2px 2px}
+.ol-attribution{display: none;} /* byjang */
+.ol-attribution{text-align:right;bottom:.5em;right:.5em;max-width:calc(100% - 1.3em)}
+.ol-attribution ul{margin:0;padding:0 .5em;font-size:.7rem;line-height:1.375em;color:#000;text-shadow:0 0 2px #fff}
+.ol-attribution li{display:inline;list-style:none;line-height:inherit}
+.ol-attribution li:not(:last-child):after{content:" "}
+.ol-attribution img{max-height:2em;max-width:inherit;vertical-align:middle}
+.ol-attribution button,.ol-attribution ul{display:inline-block}
+.ol-attribution.ol-collapsed ul{display:none}
+.ol-attribution.ol-logo-only ul{display:block}
+.ol-attribution:not(.ol-collapsed){background:rgba(255,255,255,.8)}
+.ol-attribution.ol-uncollapsible{bottom:0;right:0;border-radius:4px 0 0;height:1.1em;line-height:1em}
+.ol-attribution.ol-logo-only{background:0 0;bottom:.4em;height:1.1em;line-height:1em}
+.ol-attribution.ol-uncollapsible img{margin-top:-.2em;max-height:1.6em}
+.ol-attribution.ol-logo-only button,.ol-attribution.ol-uncollapsible button{display:none}
+.ol-zoomslider{top:4.5em;left:.5em;height:200px}
+.ol-zoomslider button{position:relative;height:10px}
+.ol-touch .ol-zoomslider{top:5.5em}
+
+
+---.ol-overviewmap{left:.5em;bottom:.5em}
+.ol-overviewmap{bottom:.5em}
+.ol-overviewmap.ol-uncollapsible{bottom:0;left:0;border-radius:0 4px 0 0}
+.ol-overviewmap .ol-overviewmap-map,.ol-overviewmap button{display:inline-block}
+.ol-overviewmap .ol-overviewmap-map{border:1px solid #7b98bc;height:150px;margin:2px;width:150px}
+---.ol-overviewmap:not(.ol-collapsed) button{bottom:1px;left:2px;position:absolute}
+.ol-overviewmap:not(.ol-collapsed) button{left:2px;position:absolute}
+.ol-overviewmap.ol-collapsed .ol-overviewmap-map,.ol-overviewmap.ol-uncollapsible button{display:none}
+.ol-overviewmap:not(.ol-collapsed){background:rgba(255,255,255,.8)}
+.ol-overviewmap-box{border:2px dotted rgba(0,60,136,.7)}
+.ol-overviewmap .ol-overviewmap-box:hover{cursor:move}
+.ol-overviewmap:not(.ol-collapsed) {height: 160px;} /* byjang */
+.ol-overviewmap button {width: 25px;height: 25px;} /* byjang */
+.ol-custom-overviewmap, .ol-custom-overviewmap.ol-uncollapsible {left: auto;right: 5px;bottom: 70px;height: 40px;} /* byjang */
+.indexMap_span {background: url(../images/widget/indexmap_off.png) no-repeat;background-position: center;background-size: 25px;width: 25px;height: 25px;} /* byjang */
+.indexMap_colspan {background: url(../images/widget/indexmap_on.png) no-repeat;background-position: center;background-size: 25px;width: 25px;height: 25px;} /* byjang */
+
+
+
+
+/* byjang :  tooltip */
+.ol-tooltip {position: relative;background: rgba(0, 0, 0, 0.5);border-radius: 4px;color: white;padding: 4px 8px;white-space: nowrap;font-size: 12px;height: 34px;line-height: 25px;text-align: center;border: 1px solid #eee;}
+.ol-tooltip-measure {opacity: 1;font-weight: bold;}
+.ol-tooltip-static {background: #fff;text-align: center;z-index: 1;color: #c8200a;font-weight: bold;height: 35px;border: 2px solid #c8200a;}
+.ol-tooltip-measure:before, .ol-tooltip-static:before {border-top: 6px solid rgba(0, 0, 0, 0.5);border-right: 6px solid transparent;border-left: 6px solid transparent;content: "";position: absolute;bottom: -6px;margin-left: -7px;left: 50%;}
+.ol-tooltip-static:before {border-top-color: #ffcc33;}
+
+
+/**/
+.gnRoadView {width:280px;height:280px;background:#fff;border: 1px solid rgb(117, 117, 117); position:absolute;right:0px;bottom:0px;z-index:99; display: none;}
+.gnRoadViewBtn {position:absolute;right:255px;bottom:255px;z-index:99; display: none;background: url(../images/roadview/expand.png) no-repeat;background-position: center;background-size: 25px;width: 25px;height: 25px;display: none;   }
+.gnRoadViewBtn:hover {background: #00AC9A;background: url(../images/roadview/expand-hover.png) no-repeat;background-position: center;background-size: 25px;width: 25px;height: 25px;}
+.gnRoadViewClose {width:25px;height:25px;background:none; border: none;color:rgb(117, 117, 117);font-size: 22px;position:absolute;right:4px;bottom:254px;z-index:999;}
+
+/* kakao 지?�영???�기 */
+.map_kakao {width: 100%; height:100%; position:absolute; display:none; z-index:70}
+.map_kakao .gnRoadViewDivBtn {background: url(../images/roadview/rv_close.png) no-repeat; background-position: center; background-size: 25px; width: 25px; height: 25px; position: absolute; z-index: 20; top: 10px; right: 10px; display: flex; }
+.gnRoadViewDiv {background: #000;border: 1px solid rgb(117, 117, 117);position: absolute;right: 0px;bottom: 0px;z-index: 99;}
+.gnRoadViewDivBtn {background: url(../images/roadview/rv_close.png) no-repeat;background-position: center;background-size: 25px;width: 25px;height: 25px;position: absolute;z-index: 999;top: 10px;right: 10px;display: none;background-color: #ffffff;	}
+
+
+/* 지???�단 경고 */
+.gn-map-comment {position: fixed;width: 800px;height: 40px;bottom: 60px;background-color: rgba(0, 0, 0, .1);left: 70px;z-index:1;}
+.gn-map-comment span{color: red;font-size: 15px;text-align: center;display: block;line-height: 40px; }
+
+
+ /* 지?�위??로드뷰의 ?�치?� 각도�??�시?�기 ?�한 map walker ?�이콘의 ?��???*/
+.MapWalker {position:absolute;margin:-26px 0 0 -51px}
+.MapWalker .figure {position:absolute;width:25px;left:38px;top:-2px;
+    height:39px;background:url(https://t1.daumcdn.net/localimg/localimages/07/2018/pc/roadview_minimap_wk_2018.png) -298px -114px no-repeat}
+.MapWalker .angleBack {width:102px;height:52px;background: url(https://t1.daumcdn.net/localimg/localimages/07/2018/pc/roadview_minimap_wk_2018.png) -834px -2px no-repeat;}
+.MapWalker.m0 .figure {background-position: -298px -114px;}
+.MapWalker.m1 .figure {background-position: -335px -114px;}
+.MapWalker.m2 .figure {background-position: -372px -114px;}
+.MapWalker.m3 .figure {background-position: -409px -114px;}
+.MapWalker.m4 .figure {background-position: -446px -114px;}
+.MapWalker.m5 .figure {background-position: -483px -114px;}
+.MapWalker.m6 .figure {background-position: -520px -114px;}
+.MapWalker.m7 .figure {background-position: -557px -114px;}
+.MapWalker.m8 .figure {background-position: -2px -114px;}
+.MapWalker.m9 .figure {background-position: -39px -114px;}
+.MapWalker.m10 .figure {background-position: -76px -114px;}
+.MapWalker.m11 .figure {background-position: -113px -114px;}
+.MapWalker.m12 .figure {background-position: -150px -114px;}
+.MapWalker.m13 .figure {background-position: -187px -114px;}
+.MapWalker.m14 .figure {background-position: -224px -114px;}
+.MapWalker.m15 .figure {background-position: -261px -114px;}
+.MapWalker.m0 .angleBack {background-position: -834px -2px;}
+.MapWalker.m1 .angleBack {background-position: -938px -2px;}
+.MapWalker.m2 .angleBack {background-position: -1042px -2px;}
+.MapWalker.m3 .angleBack {background-position: -1146px -2px;}
+.MapWalker.m4 .angleBack {background-position: -1250px -2px;}
+.MapWalker.m5 .angleBack {background-position: -1354px -2px;}
+.MapWalker.m6 .angleBack {background-position: -1458px -2px;}
+.MapWalker.m7 .angleBack {background-position: -1562px -2px;}
+.MapWalker.m8 .angleBack {background-position: -2px -2px;}
+.MapWalker.m9 .angleBack {background-position: -106px -2px;}
+.MapWalker.m10 .angleBack {background-position: -210px -2px;}
+.MapWalker.m11 .angleBack {background-position: -314px -2px;}
+.MapWalker.m12 .angleBack {background-position: -418px -2px;}
+.MapWalker.m13 .angleBack {background-position: -522px -2px;}
+.MapWalker.m14 .angleBack {background-position: -626px -2px;}
+.MapWalker.m15 .angleBack {background-position: -730px -2px;}

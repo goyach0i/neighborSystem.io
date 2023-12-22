@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/favicon-16x16.png" />
+    <title>neighbor system</title>
+
+    <!-- 기본 참조 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./lib/Cesium-1.95/Widgets/widgets.css" />
+    <!-- Cesium Widgets CSS -->
+    <link rel="stylesheet" href="./css/ol.css" />
+    <!-- Openlayers 4 CSS -->
+
+    <!-- 화면 정의 CSS -->
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/util.css" />
+
+    <link rel="stylesheet" href="./css/map.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 01. GNB 영역 -->
+      <aside class="header">
+        <div class="menu">
+          <ul>
+            <li class="simulation"><a href="#">시뮬레이션</a></li>
+            <li><a href="#">MENU</a></li>
+            <li><a href="#">MENU</a></li>
+            <li><a href="#">MENU</a></li>
+          </ul>
+        </div>
+        <div class="logo">
+          <a class="logo_img" href="#">
+            <i title="로고" class="logo_img"></i>
+          </a>
+        </div>
+        <div class="user">
+          <div class="user-name">홍길동</div>
+          <div class="user-fix">&nbsp;님 로그인 하셨습니다.</div>
+          <div class="user-logo"></div>
+        </div>
+      </aside>
+      <!-- 시뮬레이션 팝업 -->
+      <div class="simulationPopup">
+        <div class="simulHeader">
+          <p>시뮬레이션 컨트롤러</p>
+          <i class="close">X</i>
+        </div>
+        <div class="simulSection">
+          <div class="section1">
+            <div class="sectionWrap">
+              <div class="sectionTitle" style="margin-bottom: 10px">
+                <i>·</i>
+                <p>생성 / 지점 이동</p>
+              </div>
+              <div class="sectionBody">
+                <button class="box">
+                  <i></i>
+                  경로그리기
+                </button>
+                <button class="box">
+                  <i></i>
+                  시작위치이동
+                </button>
+                <button class="box">
+                  <i></i>
+                  사상항로
+                </button>
+              </div>
+            </div>
+            <div class="sectionWrap">
+              <div class="sectionTitle" style="margin-top: 15px">
+                <i>·</i>
+                <p>제어</p>
+              </div>
+              <div class="sectionBody2">
+                <div class="boxWrap1">
+                  <button class="box">
+                    <i></i>
+                    재생
+                  </button>
+                  <button class="box">
+                    <i></i>
+                    일시정지
+                  </button>
+                  <button class="box">
+                    <i></i>
+                    정지
+                  </button>
+                  <select name="비행배속" class="selectBox">
+                    <option value="">비행배속</option>
+                  </select>
+                </div>
+                <div class="boxWrap2">
+                  <h1>비행경로</h1>
+                  <button class="switch1">
+                    <p class="on1">ON</p>
+                    <p class="off1">OFF</p>
+                  </button>
+                  <h1>버텍스</h1>
+                  <button class="switch2">
+                    <p class="on2">ON</p>
+                    <p class="off2">OFF</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section2">
+            <div class="sectionWrap">
+              <div class="sectionTitle">
+                <i>·</i>
+                <p>화면전환</p>
+              </div>
+              <div class="sectionBody">
+                <button class="box">1인칭</button>
+                <button class="box">앞면</button>
+                <button class="box">뒷면</button>
+                <button class="box">좌측</button>
+                <button class="box">우측</button>
+                <button class="box">회전</button>
+                <button class="box" style="width: 92px; height: 41px">
+                  따라가기
+                </button>
+              </div>
+            </div>
+            <div class="sectionWrap2">
+              <div class="section01">
+                <div class="sectionTitle">
+                  <i>·</i>
+                  <p>색상</p>
+                </div>
+                <div class="sectionBody">
+                  <label for="">상행경로</label>
+                  <input
+                    type="color"
+                    value="#0054FF"
+                    style="width: 20px; height: 20px; border-radius: 20px"
+                  />
+                  <label for="" style="margin-left: 10px">하행경로</label>
+                  <input
+                    input
+                    type="color"
+                    value="#FF0000"
+                    style="width: 20px; height: 20px; border-radius: 20px"
+                  />
+                </div>
+              </div>
+              <div class="section02">
+                <div class="sectionTitle">
+                  <i>·</i>
+                  <p>출돌체크 여부</p>
+                </div>
+                <div class="sectionBody">
+                  <input type="checkbox" />
+                  <label for="">충돌 거리</label>
+                </div>
+              </div>
+            </div>
+            <div class="sectionWrap opacity">
+              <div class="sectionTitle">
+                <i>·</i>
+                <p>투명도</p>
+              </div>
+              <div class="sectionBody">
+                <label for="">상행경로</label>
+                <input type="text" style="margin-right: 20px" />
+                <label for="">하행경로</label>
+                <input type="text" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 탭 -->
+      <div class="tab">
+        <div class="tabWrap">
+          <div class="tabHeader">
+            <p for="">위치검색</p>
+          </div>
+          <div class="tabSection">
+            <div class="tabMenu">
+              <ul>
+                <li><button class="integrated">통합</button></li>
+                <li><button class="designation">명칭</button></li>
+                <li><button class="roadName">도로명</button></li>
+                <li><button class="streetNumber">지번</button></li>
+              </ul>
+            </div>
+            <div class="tabSearch">
+              <input type="text" />
+              <div class="searchBt">
+                <button><i></i></button>
+              </div>
+              <div class="reset">
+                <button><i></i></button>
+              </div>
+            </div>
+            <div class="seeMore1">
+              <ul>
+                <li>
+                  <div class="labelWrap">
+                    <label class="seeName">명칭</label>
+                    <label class="seeNum">300건</label>
+                  </div>
+                  <button class="seeMoreBt">더보기</button>
+                </li>
+                <div class="designationDiv">
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동 KCC 아파트</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구 토당로 162번길</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4 KCC아파트</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동 KCC 아파트</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구 토당로 162번길</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4 KCC아파트</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <li>
+                  <div class="labelWrap">
+                    <label class="seeName">도로명</label>
+                    <label class="seeNum">400건</label>
+                  </div>
+                  <button class="seeMoreBt">더보기</button>
+                </li>
+                <div class="designationDiv">
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동 KCC 아파트</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구 토당로 162번길</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4 KCC아파트</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <li>
+                  <div class="labelWrap">
+                    <label class="seeName">지번</label>
+                    <label class="seeNum">500건</label>
+                  </div>
+                  <button class="seeMoreBt">더보기</button>
+                </li>
+                <div class="designationDiv">
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="designationHeader">
+                      <p>토당동 KCC 아파트</p>
+                    </div>
+                    <div class="designationSection">
+                      <div class="sectionRoadName">
+                        <label for="">도로명</label>
+                        <p>경기도 고양시 덕양구 토당로 162번길</p>
+                      </div>
+                      <div class="sectionStreetNumber">
+                        <label for="">지번</label>
+                        <p>경기도 고양시 덕양구 토당동 335-4 KCC아파트</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ul>
+            </div>
+            <!-- 명칭 -->
+            <div class="seeMore2">
+              <ul>
+                <li>
+                  <div class="labelWrap">
+                    <label class="seeName">검색결과</label>
+                    <label class="seeNum">300건</label>
+                  </div>
+                </li>
+                <div class="designationDiv">
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="numbering">
+                  <span><<</span>
+                  <span><</span>
+                  <div class="page-number">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                  </div>
+                  <span>></span>
+                  <span>>></span>
+                </div>
+              </ul>
+            </div>
+            <!-- 도로명 -->
+            <div class="seeMore2">
+              <ul>
+                <li>
+                  <div class="labelWrap">
+                    <label class="seeName">검색결과</label>
+                    <label class="seeNum">400건</label>
+                  </div>
+                </li>
+                <div class="designationDiv">
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4 KCC아파트</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="numbering">
+                  <span><<</span>
+                  <span><</span>
+                  <div class="page-number">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                  </div>
+                  <span>></span>
+                  <span>>></span>
+                </div>
+              </ul>
+            </div>
+            <!-- 지번 -->
+            <div class="seeMore2">
+              <ul>
+                <li>
+                  <div class="labelWrap">
+                    <label class="seeName">검색결과</label>
+                    <label class="seeNum">500건</label>
+                  </div>
+                </li>
+                <div class="designationDiv">
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sectionBox">
+                    <div class="pinIcon">
+                      <i class="pin"></i>
+                    </div>
+                    <div class="seeMoreWrap">
+                      <div class="designationHeader">
+                        <p>토당동</p>
+                      </div>
+                      <div class="designationSection">
+                        <div class="sectionRoadName">
+                          <label for="">도로명</label>
+                          <p>경기도 고양시 덕양구</p>
+                        </div>
+                        <div class="sectionStreetNumber">
+                          <label for="">지번</label>
+                          <p>경기도 고양시 덕양구 토당동 335-4</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="numbering">
+                  <span><<</span>
+                  <span><</span>
+                  <div class="page-number">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                  </div>
+                  <span>></span>
+                  <span>>></span>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 레이어 -->
+      <div class="layer-first">
+        <div class="layer-first-header">
+          <button class="layer-first-plus">+</button>
+          <button class="layer-first-minus">-</button>
+          <i>1</i>
+          <i>2</i>
+          <i>3</i>
+          <i>4</i>
+          <button class="layer-open">레이어 관리</button>
+          <button class="layer-close1">X</button>
+        </div>
+        <div class="layer-first-section">
+          <ul>
+            <button class="layer-list">
+              <input type="checkbox" name="" id="" />
+              <p>분석 레이어</p>
+              <i class="layer-first-i"></i>
+            </button>
+            <div class="list-section">
+              <div class="list-section-content">
+                <div class="list-section-header">
+                  <input type="checkbox" name="" id="" />
+                  <p>정밀도로지도</p>
+                </div>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <div class="list-section-content-li">
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>스타일명명</p>
+                  </div>
+                </ul>
+              </div>
+            </div>
+            <button class="layer-list">
+              <input type="checkbox" name="" id="" />
+              <p>도로/교통/물류류</p>
+              <i class="layer-first-i"></i>
+            </button>
+            <div class="list-section">
+              <div class="list-section-content">
+                <div class="list-section-header">
+                  <input type="checkbox" name="" id="" />
+                  <p>정밀도로지도</p>
+                </div>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <div class="list-section-content-li">
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>스타일명명</p>
+                  </div>
+                </ul>
+              </div>
+            </div>
+            <button class="layer-list">
+              <input type="checkbox" name="" id="" />
+              <p>분석 레이어</p>
+              <i class="layer-first-i"></i>
+            </button>
+            <div class="list-section">
+              <div class="list-section-content">
+                <div class="list-section-header">
+                  <input type="checkbox" name="" id="" />
+                  <p>정밀도로지도</p>
+                </div>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>레이어 1(업무 레이어)</p>
+                    <button class="list-section-plus">+</button>
+                  </li>
+                  <div class="list-section-content-li">
+                    <input
+                      type="color"
+                      value="#F000;"
+                      style="width: 50px; height: 24px"
+                    />
+                    <p>스타일명명</p>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 레이어 플러스 -->
+      <div class="layer-plus-pop">
+        <div class="layer-plus-header">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="140"
+            height="20"
+            viewBox="0 0 140 20"
+            fill="none"
+          >
+            <rect y="6" width="140" height="8" rx="4" fill="#16E6C7" />
+            <circle cx="130" cy="10" r="10" fill="#16E6C7" />
+          </svg>
+        </div>
+        <div class="layer-plus-section">
+          <button>레이어 전체보기</button>
+          <button>레이어정보 보기</button>
+          <button>레이어속성 보기</button>
+          <button>스타일 설정</button>
+          <button>필터링 설정</button>
+          <button>파일로 내려받기</button>
+          <button>편집 시작</button>
+          <button>레이어 삭제</button>
+        </div>
+      </div>
+
+      <!-- 레이어 관리 -->
+      <div class="layer-pop">
+        <div class="layer-wrap">
+          <div class="layer-header">
+            <p>레이어 관리</p>
+            <button class="layer-close">X</button>
+          </div>
+          <div class="layer-section">
+            <div class="layer-section-wrapper">
+              <div class="layer-content-1">
+                <div class="content-header">
+                  <div class="content-header-title">레이어 목록</div>
+                  <div class="content-header-icon">
+                    <i class="top1">1</i>
+                    <i class="down1">2</i>
+                    <i class="top2">3</i>
+                    <i class="down2">4</i>
+                  </div>
+                </div>
+                <div class="content-section1">
+                  <div class="content-section-top">
+                    <div class="check-div">
+                      <input type="checkbox" name="" id="" />
+                      <p>레이어 그룹</p>
+                    </div>
+                  </div>
+                  <div class="content-section-check">
+                    <div class="check-div">
+                      <input type="checkbox" name="" id="" />
+                      <input type="color" value="#0054FF" style="width: 50px" />
+                      <p>레이어 그룹</p>
+                    </div>
+                    <div class="check-div">
+                      <input type="checkbox" name="" id="" />
+                      <input type="color" value="#1e263e" style="width: 50px" />
+                      <p>레이어 그룹</p>
+                    </div>
+                    <div class="check-div">
+                      <input type="checkbox" name="" id="" />
+                      <input type="color" value="#181d2d" style="width: 50px" />
+                      <p>레이어 그룹</p>
+                    </div>
+                    <div class="check-div">
+                      <input type="checkbox" name="" id="" />
+                      <input type="color" value="#11172f" style="width: 50px" />
+                      <p>레이어 그룹</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="layer-content-2">
+                <button class="plus">+</button>
+                <button class="minus">-</button>
+              </div>
+              <div class="layer-content-3">
+                <div class="content-2-top">
+                  <input class="top-check" type="checkbox" />
+                  <p>전체선택 해제</p>
+                  <select name="시설물" class="top-selct">
+                    <option value="시설물">시설물</option>
+                  </select>
+                  <input
+                    class="top-search"
+                    type="text"
+                    placeholder="검색어를 입력하세요"
+                  />
+                  <button class="top-reset">초기화</button>
+                  <button class="top-search-bt">검색</button>
+                </div>
+                <div class="content-2-wrapper">
+                  <div class="content-2-section1">
+                    <div class="content-section-check">
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#0054FF"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#1e263e"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#181d2d"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#11172f"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="content-2-section2">
+                    <div class="content-section-check">
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#0054FF"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#1e263e"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#181d2d"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                      <div class="check-div">
+                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="color"
+                          value="#11172f"
+                          style="width: 50px"
+                        />
+                        <p>레이어 이름</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layer-section-button">
+              <button class="apply-button">적용</button>
+              <button class="close-button">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 출력(지도) -->
+      <div class="map-output">
+        <div class="map-output-header">
+          <p>출력(지도)</p>
+          <i class="map-close"></i>
+        </div>
+        <div class="map-output-section">
+          <div class="output-area">
+            <p>· 출력 영역</p>
+            <div class="output-select">
+              <select name="" id="">
+                <option value="용지크기">용지크기</option>
+              </select>
+              <select name="" id="">
+                <option value="지도화면">지도화면</option>
+              </select>
+            </div>
+          </div>
+          <div class="accumulation">
+            <p>· 축적</p>
+            <select name="" id="">
+              <option value="1:150,000">1:150,000</option>
+            </select>
+          </div>
+          <div class="output-images">
+            <p>· 이미지</p>
+            <select name="" id="">
+              <option value="가로:80cm(300px) 세로:80px(300px)">
+                가로:80cm(300px) 세로:80px(300px)
+              </option>
+            </select>
+          </div>
+          <div>
+            <div class="output-map-images">
+              <p>· 출력영역</p>
+              <div class="map-images">
+                <i class="map-area-images"></i>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="explanation">
+              <p>· 설명</p>
+              <textarea
+                placeholder="지도와 함께 출력할 메모 내용을 입력하세요.&#10;(최대 100자)"
+              ></textarea>
+            </div>
+          </div>
+          <div class="output-button">
+            <div class="output-button-wrap">
+              <button class="output-apply">적용</button>
+              <button class="output-close">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 좌표계 변경 -->
+      <div class="change-box">
+        <div class="change-header">
+          <p>좌표계 변경</p>
+          <i class="change-close"></i>
+        </div>
+        <div class="change-section">
+          <div class="change-section-content">
+            <p>· 타원체</p>
+            <select>
+              <option value="">Bassel(1841), GRS80, GRS84</option>
+            </select>
+          </div>
+          <div class="change-section-content">
+            <p>· 좌표계</p>
+            <select>
+              <option value="">Bassel(1841), GRS80, GRS84</option>
+            </select>
+          </div>
+          <div class="change-button">
+            <div class="change-button-wrap">
+              <button class="change-apply">적용</button>
+              <button class="change-close-bt">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--// 01. GNB 영역 -->
+
+      <!-- 02. MAP 영역 -->
+      <div class="nb-map" id="nb-map"></div>
+      <!-- 분활화면시 사용
+	  	<section class="nb-map" id="nb-map2"></section>
+	  	<section class="nb-map" id="nb-map3"></section>
+	  	<section class="nb-map" id="nb-map4"></section>
+	   	-->
+      <!--// 02. MAP 영역 -->
+
+      <!-- 03.통합검색 -->
+      <aside class="text-search-bar">
+        <input type="text" placeholder="검색어를 입력하세요" />
+        <button type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </aside>
+      <!--// 03.통합검색 -->
+
+      <!-- 04.우측상단 : 일반지도 -->
+      <!-- <div class="section-menu base-map">
+      		<nav>
+        		<ul>
+          			<li id="menu01" class="menu menu1">
+          				<label>교통정보</label>
+          				<i id="menu01Img"></i>
+          				<ul>
+          					<li>교통1</li>
+          					<li>교통2</li>
+          					<li>교통3</li>
+          				</ul> 
+          			</li>
+          			<div id="subMenu01" class="sub_menu_wrap1">
+            			<div class="inner">
+              				<ul>
+                				<li id="subMenu9" class="subMenu subMenu21"> <i title="체크박스" id="check9"></i> 다음 </li>
+					            <li id="subMenu10" class="subMenu subMenu21"> <i title="체크박스" id="check10"></i> 카카오맵
+              				</ul>
+            			</div>
+          			</div>
+        		</ul>
+      		</nav>
+    	</div> -->
+      <aside class="select-map base-map">
+        <div class="map-select">
+          <a>일반지도<i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="active">
+            <!-- active 추가시 활성화 -->
+            <li>
+              <a href="#">
+                <input
+                  type="radio"
+                  name="temp"
+                  id="vworld_base"
+                  value="브이월드 일반지도"
+                />
+                <label for="temp">다음 일반지도</label>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <input
+                  type="radio"
+                  name="temp"
+                  id="vworld_hybrid"
+                  value="브이월드 하이브리드"
+                />
+                <label for="temp">다음 하이브리드</label>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <input
+                  type="radio"
+                  name="temp"
+                  id="vworld_satellite"
+                  value="브이월드 위성지도"
+                />
+                <label for="temp">브이월드 위성지도</label>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <input
+                  type="radio"
+                  name="temp"
+                  id="vworld_white"
+                  value="브이월드 백지도"
+                />
+                <label for="temp">브이월드 백지도</label>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <input
+                  type="radio"
+                  name="temp"
+                  id="vworld_midnight"
+                  value="브이월드 야간지도"
+                />
+                <label for="temp">브이월드 야간지도</label>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <input
+                  type="radio"
+                  name="label2"
+                  id="vAir"
+                  value="브이월드 하이브리드"
+                />
+                <label for="vAir">브이월드 하이브리드</label>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <!--// 04.우측상단 : 일반지도 -->
+
+      <!-- 05.우측상단 : 항공지도 -->
+      <aside class="select-map aerial-map"></aside>
+      <!--// 05.우측상단 : 항공지도 -->
+
+      <!-- 06.우측상단 : 지역정보 -->
+      <aside class="select-map area-map"></aside>
+      <!--// 06.우측상단 : 지역정보 -->
+
+      <!-- 07.우측상단 : 교통정보 -->
+      <aside class="select-map traffic-map"></aside>
+      <!--// 07.우측상단 : 교통정보 -->
+
+      <!-- 08.툴바 -->
+      <!-- 08.툴바 아이콘 칼라시 클래스명 _color 추가 -->
+      <aside class="toolbar">
+        <ul class="grp-01_color">
+          <li class="compass">
+            <a class="active_on" href="#" title="나침반" id="i_compass"></a>
+          </li>
+          <li class="division">
+            <a class="active_on" href="#" title="분할" id="i_division"></a>
+          </li>
+          <li class="roadView">
+            <a class="active_on" href="#" title="로드뷰" id="i_roadview"></a>
+            <ul class="roadView_ul">
+              <!-- active-flex 추가시 활성화 -->
+              <li class="roadView_1"><a href="#" title="팝업창"></a></li>
+              <li class="roadView_2"><a href="#" title="미니맵"></a></li>
+            </ul>
+          </li>
+          <li class="layer">
+            <a class="active_on" href="#" title="맵변경" class="activeon"></a>
+          </li>
+          <li class="layer">
+            <a class="active_on" href="#" title="레이어"></a>
+          </li>
+        </ul>
+
+        <ul class="grp-02_color">
+          <li><a class="" href="#" title="전체" id="i_viewall"></a></li>
+          <li><a class="" href="#" title="확대" id="i_zoomin"></a></li>
+          <li><a class="" href="#" title="축소" id="i_zoomout"></a></li>
+          <li><a class="" href="#" title="다음" id="i_prev"></a></li>
+          <li><a class="" href="#" title="이전" id="i_next"></a></li>
+        </ul>
+
+        <ul class="grp-03_color">
+          <li>
+            <a
+              class="active_on"
+              href="#"
+              title="초기화"
+              id="i_initialization"
+            ></a>
+          </li>
+          <li><a class="active_on" href="#" title="거리"></a></li>
+          <li><a class="active_on" href="#" title="면적"></a></li>
+          <li><a class="active_on" href="#" title="반경"></a></li>
+          <li><a class="active_on" href="#" title="고도"></a></li>
+        </ul>
+
+        <ul class="grp-04_color">
+          <li><a class="active_on" href="#" title="저장" id="i_save"></a></li>
+          <li><a class="active_on" href="#" title="인쇄" id="i_print"></a></li>
+          <li>
+            <a class="active_on" href="#" title="출력" id="i_save_print"></a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- 09. (위젯) 위치 -->
+      <aside class="footerbar-status location">
+        <h3>위치</h3>
+        <div class="tool-status-select">
+          <div>
+            <span>선택</span>
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+          <ul class="">
+            <!-- active 추가시 활성화 -->
+            <li>
+              <a href="#" class="on">서울</a>
+            </li>
+            <li>
+              <a href="#">경기</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <!--// 09. (위젯) 위치 -->
+
+      <!-- 10. (위젯) 축척 -->
+      <aside class="footerbar-status scale">
+        <h3>축척</h3>
+        <div class="tool-status-select">
+          <div>
+            <span>선택</span>
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+          <ul class="">
+            <!-- active 추가시 활성화 -->
+            <li>
+              <a href="#" class="on">1:00000000</a>
+            </li>
+            <li>
+              <a href="#">4:400000000</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <!--// 10. (위젯) 축척 -->
+
+      <!-- 11. (위젯) 좌표 -->
+      <aside class="footerbar-status coordinate">
+        <h3>좌표</h3>
+        <div class="coord longitude">127.123456</div>
+        <div class="coord latitude">37.123456</div>
+        <div class="coord altitude">20000</div>
+        <div class="coordinate-change"><a href="#"></a></div>
+      </aside>
+      <!--// 11. (위젯) 좌표 -->
+
+      <!-- 
+    	<div class="loadview"> 
+       		<button type="button">
+      			<div class="rodeview_Mapspan" title="로드뷰닫기"></div>
+      		</button>
+     	</div> 
+     	-->
+
+      <!-- 12. (위젯) 인덱스맵 -->
+      <aside class="index-map"></aside>
+      <!-- 12. (위젯) 인덱스맵 -->
+    </div>
+
+    <!-- javascript import -->
+    <!-- <script src="./js/index.js"></script>  -->
+    <script src="./lib/Cesium-1.95/Cesium.js"></script>
+    <script src="./lib/ol/v4.6.5/ol.js"></script>
+    <script src="./js/map.js"></script>
+    <script src="./js/toolbar.js"></script>
+    <!-- 적용방법 1 -->
+
+    <!-- 적용방법 3 -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script src="./js/popup.js"></script>
+  </body>
+</html>
